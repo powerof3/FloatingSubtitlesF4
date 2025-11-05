@@ -1,0 +1,25 @@
+set(SOURCES
+	include/Hooks.h
+	include/ImGui/FontStyles.h
+	include/ImGui/Renderer.h
+	include/ImGui/Util.h
+	include/Localization.h
+	include/Manager.h
+	include/PCH.h
+	include/RE.h
+	include/RayCaster.h
+	include/SettingLoader.h
+	include/Subtitles.h
+	src/Hooks.cpp
+	src/ImGui/FontStyles.cpp
+	src/ImGui/Renderer.cpp
+	src/ImGui/Util.cpp
+	src/Localization.cpp
+	src/Manager.cpp
+	src/PCH.cpp
+	src/RE.cpp
+	src/RayCaster.cpp
+	src/SettingLoader.cpp
+	src/Subtitles.cpp
+	src/main.cpp
+)

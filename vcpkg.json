@@ -1,0 +1,24 @@
+{
+  "name": "floating-subtitles-f4",
+  "version-string": "1.0.0",
+  "description": "",
+  "homepage": "",
+  "license": "MIT",
+  "dependencies": [
+    "boost-unordered",
+    "clib-util",
+    "freetype",
+    {
+      "name": "imgui",
+      "features": [ "dx11-binding", "win32-binding", "freetype", "wchar32" ]
+    },
+    "rsm-mmio",
+    {
+      "name": "spdlog",
+      "features": [ "wchar" ]
+    },
+    "srell",
+    "xbyak"
+  ],
+  "builtin-baseline": "46a114bc182fdeb162554f255f02a4fba10733b5"
+}
