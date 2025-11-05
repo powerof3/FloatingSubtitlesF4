@@ -73,11 +73,14 @@ RayCaster::Result RayCaster::GetResult(bool a_debugRay)
 		}
 	}
 
-	auto cell = actor->parentCell;
-	auto bhkWorld = cell ? cell->GetbhkWorld() : nullptr;
+	auto cell = actor->GetParentCell();
+	if (!cell || cell->cellState != RE::TESObjectCELL::CELL_STATE::kAttached || !cell->loadedData) {
+		return Result::kOffscreen;
+	}
 
-	if (!cell || !bhkWorld || !bhkWorld->worldNP.ptr) {
-		return Result::kOffscreen;  // can't raycast so might as well return true
+	auto bhkWorld = cell->GetbhkWorld();
+	if (!bhkWorld || !bhkWorld->worldNP.ptr) {
+		return Result::kOffscreen;
 	}
 
 	targetPoints[0] = actor->CalculateLOSLocation(RE::ACTOR_LOS_LOCATION::kEye);
@@ -102,14 +105,15 @@ RayCaster::Result RayCaster::GetResult(bool a_debugRay)
 
 		pickData.SetStartEnd(startPoint.camera, targetPoints[i]);
 
-		auto object = cell->Pick(pickData);
-		auto owner = object ? RE::TESObjectREFR::FindReferenceFor3D(object) : nullptr;
-		if (owner == actor) {
-			result = true;
-		}
-
-		if (a_debugRay) {
-			DebugRay(pickData, object, owner, targetPoints[i], debugColors[i]);
+		if (cell && cell->cellState == RE::TESObjectCELL::CELL_STATE::kAttached && cell->loadedData) {
+			auto object = cell->Pick(pickData);
+			auto owner = object ? RE::TESObjectREFR::FindReferenceFor3D(object) : nullptr;
+			if (owner == actor) {
+				result = true;
+			}
+			if (a_debugRay) {
+				DebugRay(pickData, object, owner, targetPoints[i], debugColors[i]);
+			}
 		}
 	}
 
