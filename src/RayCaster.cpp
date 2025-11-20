@@ -105,15 +105,13 @@ RayCaster::Result RayCaster::GetResult(bool a_debugRay)
 
 		pickData.SetStartEnd(startPoint.camera, targetPoints[i]);
 
-		if (cell && cell->cellState == RE::TESObjectCELL::CELL_STATE::kAttached && cell->loadedData) {
-			auto object = cell->Pick(pickData);
-			auto owner = object ? RE::TESObjectREFR::FindReferenceFor3D(object) : nullptr;
-			if (owner == actor) {
-				result = true;
-			}
-			if (a_debugRay) {
-				DebugRay(pickData, object, owner, targetPoints[i], debugColors[i]);
-			}
+		auto object = RE::TES::GetSingleton()->Pick(pickData);
+		auto owner = object ? RE::TESObjectREFR::FindReferenceFor3D(object) : nullptr;
+		if (owner == actor) {
+			result = true;
+		}
+		if (a_debugRay) {
+			DebugRay(pickData, object, owner, targetPoints[i], debugColors[i]);
 		}
 	}
 

@@ -2,6 +2,7 @@
 
 namespace ImGui::Renderer
 {
+	void Init();
 	void Install();
 
 	// members

@@ -33,7 +33,7 @@ set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL" CACHE 
 
 project(
 	po3_FloatingSubtitlesF4
-	VERSION 1.0.1
+	VERSION 1.1.0
 	LANGUAGES CXX
 )
 

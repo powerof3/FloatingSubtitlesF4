@@ -9,6 +9,7 @@ void OnInit(F4SE::MessagingInterface::Message* a_msg)
 	case F4SE::MessagingInterface::kPostLoad:
 		{
 			logger::info("{:*^30}", "POST LOAD");
+			ImGui::Renderer::Install();
 			Hooks::Install();
 		}
 		break;
@@ -20,6 +21,7 @@ void OnInit(F4SE::MessagingInterface::Message* a_msg)
 	case F4SE::MessagingInterface::kGameDataReady:
 		{
 			logger::info("{:*^30}", "GAME DATA READY");
+			ImGui::Renderer::Init();
 			ImGui::FontStyles::GetSingleton()->Register();
 			Manager::GetSingleton()->OnDataLoaded();
 		}
@@ -75,8 +77,6 @@ extern "C" DLLEXPORT bool F4SEAPI F4SEPlugin_Load(const F4SE::LoadInterface* a_f
 	logger::info("Game version : {}", a_f4se->RuntimeVersion().string());
 
 	F4SE::AllocTrampoline(1 << 7);
-
-	ImGui::Renderer::Install();
 
 	const auto messaging = F4SE::GetMessagingInterface();
 	messaging->RegisterListener(OnInit);

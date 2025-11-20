@@ -247,6 +247,7 @@ bool Manager::UpdateSubtitleInfo(RE::SubtitleManager* a_manager)
 				subInfo.setFlag(SubtitleFlag::kSkip, false);
 
 				if ((subInfo.priority != RE::SUBTITLE_PRIORITY::kForce && subInfo.distFromPlayer > maxDistanceEndSq)) {
+					subInfo.setFlag(SubtitleFlag::kSkip, true);
 					continue;
 				}
 
